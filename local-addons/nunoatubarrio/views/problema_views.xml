@@ -1,0 +1,80 @@
+<odoo>
+
+    <data>
+        <!-- list -->
+        <record model="ir.actions.act_window" id="nunoatubarrio_problema_action">
+            <field name="name">Problemas</field>
+            <field name="res_model">nunoatubarrio.problema</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="nunoatubarrio_solucion_action">
+            <field name="name">Soluciones</field>
+            <field name="res_model">nunoatubarrio.solucion</field>
+            <field name="view_mode">form</field>
+        </record>
+        
+
+        <menuitem id="nunoatubarrio_menu_root" name="Ñuñoa Tu Barrio">
+            <menuitem id="lala1" name="Problemas">
+                <menuitem id="nunoatubarrio_problema_menu_action" action="nunoatubarrio_problema_action" name="Ver todo"/>
+            </menuitem>
+            <!-- <menuitem id="lala2" name="lala2">
+                <menuitem id="nunoatubarrio_solucion_menu_action" action="nunoatubarrio_solucion_action" name="holi2"/>
+            </menuitem> -->
+            
+            
+        </menuitem>
+        
+
+        <record id="nunoatubarrio_problema_tree" model="ir.ui.view">
+            <field name="name">nunoatubarrio.problema.tree</field>
+            <field name="model">nunoatubarrio.problema</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="unidad_vecinal"/>
+                    <field name="fecha"/>
+                    <field name="vecino_id"/>
+                    <field name="descripcion"/>
+                    <field name="estado"/>
+                    <field name="solucion_id"/>
+                </tree>
+            </field>
+        </record>
+
+       <record id="nunoatubarrio_problema_form" model="ir.ui.view">
+            <field name="name">nunoatubarrio.problema.form</field>
+            <field name="model">nunoatubarrio.problema</field>
+            <field name="arch" type="xml">
+                <form string="Test">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="fecha"/>
+                                <field name="unidad_vecinal"/>
+                                <field name="direccion" />
+                            </group>
+                            <group>
+                                <field name="vecino_id"/>
+                            </group>
+                            <notebook>
+                                <page string="Descripción del problema">
+                                    <field name="descripcion"/>
+                                </page>
+                                <page string="Solución">
+                                    <field name="solucion_id">
+                                    <form string="proband2">
+                                        <field name="direccion_responsable"/>
+                                        <field name="unidad_ejecutora"/>
+                                        <field name="descripcion"/>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

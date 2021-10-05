@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nunoatubarrio_problema,nunoatubarrio.problema,model_nunoatubarrio_problema,base.group_user,1,1,1,1
+access_nunoatubarrio_unidadvecinal,nunoatubarrio.unidadvecinal,model_nunoatubarrio_unidadvecinal,base.group_user,1,1,1,1
+access_nunoatubarrio_solucion,nunoatubarrio.solucion,model_nunoatubarrio_solucion,base.group_user,1,1,1,1
