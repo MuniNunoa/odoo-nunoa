@@ -9,4 +9,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT python odoo-bin -d ${DB_NAME} --addons-path=addons --db_host=${DB_HOST} --db_user=${DB_USER} --db_password=${DB_PASSWORD}
+# ENTRYPOINT python odoo-bin -d ${DB_NAME} -i base --addons-path=${ADDONS_PATH} --db_host=${DB_HOST} --db_user=${DB_USER} --db_password=${DB_PASSWORD} --without-demo=all
+ENTRYPOINT python odoo-bin -d ${DB_NAME} -i base --addons-path=${ADDONS_PATH} --without-demo=all --db_host=${DB_HOST} --db_user=${DB_USER} --db_password=${DB_PASSWORD} 

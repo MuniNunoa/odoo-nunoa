@@ -5,22 +5,27 @@ services:
     platform: linux/x86_64
     # image: odoo:14.0
     depends_on:
-      - mydb
+      - db
     ports:
       - "8069:8069"
     environment:
+      - ADDONS_PATH=addons,odoo/addons,local-addons
       - DB_NAME=odoo-test
-      - DB_HOST=mydb
+      - DB_HOST=db
       - DB_USER=odoo
       - DB_PASSWORD=myodoo
-  mydb:
+    volumes:
+      - .:/app
+      - odoo-data:/root/.local/share/Odoo
+  db:
     image: postgres:13
     environment:
       - POSTGRES_DB=odoo-test
       - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo
     volumes: 
-      - pgdata:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  pg-data:
+  odoo-data:
