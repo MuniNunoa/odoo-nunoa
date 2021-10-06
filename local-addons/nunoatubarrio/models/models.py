@@ -13,6 +13,7 @@ class Sector(models.Model):
 class UnidadVecinal(models.Model):
     _name = 'nunoatubarrio.unidadvecinal'
     _description = 'Unidad Vecinal'
+    _rec_name = 'numero'
 
     numero = fields.Integer("N°")
     jjvv = fields.Char("JJVV")
