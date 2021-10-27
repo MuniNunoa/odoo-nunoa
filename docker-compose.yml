@@ -10,7 +10,7 @@ services:
       - "8069:8069"
     environment:
       - ADDONS_PATH=addons,odoo/addons,local-addons
-      - DB_NAME=odoo-test
+      - DB_NAME=odoo-db
       - DB_HOST=db
       - DB_USER=odoo
       - DB_PASSWORD=myodoo
@@ -20,7 +20,7 @@ services:
   db:
     image: postgres:13
     environment:
-      - POSTGRES_DB=odoo-test
+      - POSTGRES_DB=odoo-db
       - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo
     volumes: 
