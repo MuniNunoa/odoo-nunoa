@@ -1,7 +1,5 @@
 <odoo>
-
     <data>
-        <!-- list -->
         <record model="ir.actions.act_window" id="nunoatubarrio_problema_action">
             <field name="name">Problemas</field>
             <field name="res_model">nunoatubarrio.problema</field>
@@ -13,19 +11,45 @@
             <field name="res_model">nunoatubarrio.solucion</field>
             <field name="view_mode">form</field>
         </record>
-        
 
-        <menuitem id="nunoatubarrio_menu_root" name="Ñuñoa Tu Barrio">
-            <menuitem id="lala1" name="Problemas">
-                <menuitem id="nunoatubarrio_problema_menu_action" action="nunoatubarrio_problema_action" name="Ver todo"/>
-            </menuitem>
-            <!-- <menuitem id="lala2" name="lala2">
-                <menuitem id="nunoatubarrio_solucion_menu_action" action="nunoatubarrio_solucion_action" name="holi2"/>
-            </menuitem> -->
-            
-            
-        </menuitem>
-        
+        <record model="ir.ui.view" id="nunoatubarrio_problema_graph">
+            <field name="model">nunoatubarrio.problema</field>
+            <field name="arch" type="xml">
+                <graph type="pie">
+                    <field name="unidad_vecinal"/>
+                </graph>
+            </field>
+        </record> 
+       
+        <record id="nunoatubarrio_problema_graph_action" model="ir.actions.act_window">
+            <field name="name">Barras</field>
+            <field name="res_model">nunoatubarrio.problema</field>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="nunoatubarrio_problema_graph"/>
+        </record>
+
+        <record model="ir.ui.view" id="simple_dashboard_view">
+            <field name="name">Simple Dashboard</field>
+            <field name="model">board.board</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="My Dashboard">
+                    <board style="1-1">
+                        <column>
+                            <action name="%(nunoatubarrio.nunoatubarrio_problema_graph_action)d" string="Estado de problemas"/>
+                        </column>
+                    </board>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="open_simple_dashboard_action">
+            <field name="name">My Dashboard</field>
+            <field name="res_model">board.board</field>
+            <field name="view_mode">form</field>
+            <field name="usage">menu</field>
+            <field name="view_id" ref="simple_dashboard_view"/>
+        </record>
 
         <record id="nunoatubarrio_problema_tree" model="ir.ui.view">
             <field name="name">nunoatubarrio.problema.tree</field>
@@ -62,13 +86,7 @@
                                     <field name="descripcion"/>
                                 </page>
                                 <page string="Solución">
-                                    <field name="solucion_id">
-                                    <form string="proband2">
-                                        <field name="direccion_responsable"/>
-                                        <field name="unidad_ejecutora"/>
-                                        <field name="descripcion"/>
-                                        </form>
-                                    </field>
+                                    <field name="solucion_id"/>
                                 </page>
                             </notebook>
                         </group>
@@ -76,5 +94,11 @@
                 </form>
             </field>
         </record>
+
+         <menuitem id="nunoatubarrio_menu_root" name="Ñuñoa Tu Barrio" web_icon="nunoatubarrio,static/description/icon.png">
+            <menuitem id="nunoatubarrio_problema_menu_dashboard" name="Dashboard" action="open_simple_dashboard_action"/>
+            <menuitem id="nunoatubarrio_problema_menu_list" name="Problemas vecinales" action="nunoatubarrio_problema_action"/>
+        </menuitem>
+
     </data>
 </odoo>
