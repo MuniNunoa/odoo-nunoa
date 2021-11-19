@@ -1,0 +1,135 @@
+<odoo>
+  <data>
+    <!-- procedure tree,form action -->
+    <record model="ir.actions.act_window" id="nunoasegura_procedure_action">
+        <field name="name">Procedimientos</field>
+        <field name="res_model">nunoasegura.security.procedure</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- procedure tree view -->
+    <record id="nunoasegura_procedure_tree" model="ir.ui.view">
+        <field name="name">nunoasegura.security.procedure.tree</field>
+        <field name="model">nunoasegura.security.procedure</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="created_at"/>
+                <field name="channel"/>
+                <field name="priority" widget="priority"/>
+                <field name="description"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- menus -->
+    <menuitem id="nunoasegura_menu_root" name="Ñuñoa Segura" web_icon="nunoasegura,static/description/icon.png">
+        <menuitem id="nunoasegura_procedure_menu_list" name="Procedimientos" action="nunoasegura_procedure_action"/>
+    </menuitem>
+
+    <!-- procedure form view -->
+    <record id="nunoasegura_procedure_form" model="ir.ui.view">
+            <field name="name">nunoasegura.security.procedure.form</field>
+            <field name="model">nunoasegura.security.procedure</field>
+            <field name="arch" type="xml">
+                <form string="Nuevo procedimiento">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="created_at"/>
+                                <field name="channel"/>
+                                
+                            </group>
+                            <group>
+                                
+                                <field name="priority" widget="priority"/>
+                                <field name="deadline"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="type"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="street"/>
+                                <field name="address_number"/>
+                                <field name="latitude"/>
+                                <field name="longitude"/>
+                                <field name="unidad_vecinal"/>
+                                <field name="cuadrante"/>
+                            </group>
+                            <group>
+                                <field name="latlon" widget="openstreetmap" nolabel="1"/>
+                            </group>
+                        </group>
+                                                    
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
+
+    <!-- explicit list view definition -->
+<!--
+    <record model="ir.ui.view" id="nunoasegura.list">
+      <field name="name">nunoasegura list</field>
+      <field name="model">nunoasegura.nunoasegura</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+-->
+
+    <!-- actions opening views on models -->
+<!--
+    <record model="ir.actions.act_window" id="nunoasegura.action_window">
+      <field name="name">nunoasegura window</field>
+      <field name="res_model">nunoasegura.nunoasegura</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="nunoasegura.action_server">
+      <field name="name">nunoasegura server</field>
+      <field name="model_id" ref="model_nunoasegura_nunoasegura"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="nunoasegura" id="nunoasegura.menu_root"/>
+-->
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="nunoasegura.menu_1" parent="nunoasegura.menu_root"/>
+    <menuitem name="Menu 2" id="nunoasegura.menu_2" parent="nunoasegura.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="nunoasegura.menu_1_list" parent="nunoasegura.menu_1"
+              action="nunoasegura.action_window"/>
+    <menuitem name="Server to list" id="nunoasegura" parent="nunoasegura.menu_2"
+              action="nunoasegura.action_server"/>
+-->
+  </data>
+</odoo>

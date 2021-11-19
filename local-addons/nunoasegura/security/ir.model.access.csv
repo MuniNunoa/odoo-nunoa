@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nunoasegura_security_procedure,nunoasegura.security.procedure,model_nunoasegura_security_procedure,base.group_user,1,1,1,1
+access_nunoasegura_security_procedure_type,nunoasegura.security.procedure.type,model_nunoasegura_security_procedure_type,base.group_user,1,1,1,1
+access_nunoasegura_security_procedure_type_category,nunoasegura.security.procedure.type.category,model_nunoasegura_security_procedure_type_category,base.group_user,1,1,1,1
+access_nunoasegura_neighborhood_plan,nunoasegura.neighborhood.plan,model_nunoasegura_neighborhood_plan,base.group_user,1,1,1,1

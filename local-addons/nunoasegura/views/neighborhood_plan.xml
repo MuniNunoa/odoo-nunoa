@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+      <!-- neighborhood_plan tree,form action -->
+      <record model="ir.actions.act_window" id="nunoasegura_neighborhood_plan_action">
+          <field name="name">Planes Barriales</field>
+          <field name="res_model">nunoasegura.neighborhood.plan</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+  
+      <!-- neighborhood_plan tree view -->
+      <record id="nunoasegura_neighborhood_plan_tree" model="ir.ui.view">
+          <field name="name">nunoasegura.neighborhood.plan.tree</field>
+          <field name="model">nunoasegura.neighborhood.plan</field>
+          <field name="arch" type="xml">
+              <tree>    
+                <field name="created_at"/>
+                <field name="state"/>
+                <field name="description"/>
+                <field name="request_source"/>
+                <field name="responsible_team"/>
+                <field name="cuadrante"/>
+                <field name="unidad_vecinal"/>
+                <field name="intervention_type"/>
+                <field name="weekday_start"/>
+                <field name="weekday_end"/>
+                <field name="intervention_start"/>
+                <field name="intervention_end"/>
+              </tree>
+          </field>
+      </record>
+  
+
+      <!-- neighborhood_plan form view -->
+      <record id="nunoasegura_neighborhood_plan_form" model="ir.ui.view">
+              <field name="name">nunoasegura.neighborhood.plan.form</field>
+              <field name="model">nunoasegura.neighborhood.plan</field>
+              <field name="arch" type="xml">
+                  <form string="Nuevo Plan Barrial">
+                      <sheet>
+                          <group>
+                            <field name="created_at"/>
+                            <field name="state"/>
+                            <field name="description"/>
+                            <field name="request_source"/>
+                            <field name="responsible_team"/>
+                            <field name="cuadrante"/>
+                            <field name="unidad_vecinal"/>
+                            <field name="intervention_type"/>
+                            <field name="weekday_start"/>
+                            <field name="weekday_end"/>
+                            <field name="intervention_start"/>
+                            <field name="intervention_end"/>
+                          </group>        
+                      </sheet>
+                      
+                  </form>
+              </field>
+          </record>
+          
+        <menuitem id="nunoasegura_neighborhood_plan_menu_list" name="Planes Barriales" action="nunoasegura_neighborhood_plan_action" parent="nunoasegura_menu_root"/>
+    </data>
+  </odoo>
