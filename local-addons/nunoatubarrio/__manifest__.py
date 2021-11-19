@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Ñuñoa tu barrio",
+    'name': "Ñuñoa Tu Barrio",
 
     'summary': """
         Sistema de gestión vecinal de Ñuñoa""",
@@ -10,7 +10,7 @@
     """,
 
     'author': "José Miguel Cordero, Municipalidad de Ñuñoa",
-    'website': "https://www.nunoa.cl",
+    'website': "https://github.com/josemcorderoc/odoo-nunoa",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/14.0/odoo/addons/base/data/ir_module_category_data.xml
