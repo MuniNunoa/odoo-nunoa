@@ -32,7 +32,8 @@ class Ticket(models.Model):
     description = fields.Text("Descripción")
     priority = fields.Selection(AVAILABLE_PRIORITIES, 'Prioridad', default='0')
     state = fields.Selection(AVAILABLE_STATES, 'Estado', default='nuevo', required=True)
-    created_at = fields.Datetime("Fecha de ingreso", default=lambda s: fields.Datetime.now())
+    created_at = fields.Datetime("Fecha de creación", default=lambda s: fields.Datetime.now())
+    closed_at = fields.Datetime("Fecha de cierre")
     deadline = fields.Date("Vencimiento")
     
     requester = fields.Many2one('res.partner', string="Solicitante")
@@ -77,9 +78,14 @@ class GeoPlace(models.Model):
         if self.street.type and (self.street.type != 'CALLE'):
             alternative_address = f"{self.street.type} {full_address}"
             addresses.append(alternative_address)
-        reversed_list = list(reversed(addresses))
+        # reversed_list = list(reversed(addresses))
         return list(reversed(addresses))
-        
+    
+    def reset_geolocation(self):
+        self.latitude = None
+        self.longitude = None
+        self.unidad_vecinal = None
+        self.cuadrante = None
 
     @api.onchange('street', 'address_number')
     def onchange_address(self):
@@ -91,8 +97,5 @@ class GeoPlace(models.Model):
                     self.unidad_vecinal = utils.get_uv(*lat_lon)
                     self.cuadrante = utils.get_cuadrante(*lat_lon)
                     return
-        self.latitude = None
-        self.longitude = None
-        self.unidad_vecinal = None
-        self.cuadrante = None
+        self.reset_geolocation()
     
