@@ -11,9 +11,13 @@ odoo.define("ab_openstreetmap.openstreetmap_widget", function (require) {
       self._initMap();
     },
     _initMap: function () {
+      console.log("init map");
+      console.log(this.value);
+      console.log(this.hasOwnProperty("map"));
       var self = this
       $(document).ready(function () {
         setTimeout(() => {
+          
           var lat = -33.45413198048182;
           var lng = -70.59354128229793;
           self.map = L.map('mapid').setView([lat, lng], 13);
@@ -22,6 +26,11 @@ odoo.define("ab_openstreetmap.openstreetmap_widget", function (require) {
             attribution:
             '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           }).addTo(self.map);
+
+          var lat_lon = self.value.split(",").map(Number);
+          console.log("AAAA");
+          console.log(lat_lon);
+          self.renderMapMarker(lat_lon);
 
           // this.map = mymap;
 
@@ -74,17 +83,32 @@ odoo.define("ab_openstreetmap.openstreetmap_widget", function (require) {
 
       });
     },
+    renderMapMarker: function (lat_lon) {
+      if (this.hasOwnProperty("map") & (lat_lon[0] !==0) & (lat_lon[1] !== 0) ) {
+        // console.log("render read only");
+        // lat_lon = lat_lon.split(",").map(Number);
+        this.map.setView(lat_lon, 16);
+        if (this.marker != undefined) {
+          this.map.removeLayer(this.marker);
+        }        
+        this.marker = L.marker(lat_lon).addTo(this.map);
+      }
+    },
 
     _renderReadonly: function () {
       if (this.hasOwnProperty("map")) {
+        console.log("render read only");
         var lat_lon = this.value.split(",").map(Number);
-        if ((lat_lon[0] !==0) & (lat_lon[1] !== 0)) {
-          this.map.setView(lat_lon, 16);
-          if (this.marker != undefined) {
-            this.map.removeLayer(this.marker);
-          }        
-          this.marker = L.marker(lat_lon).addTo(this.map);
-        }
+        this.renderMapMarker(lat_lon);
+        
+        
+        // if ((lat_lon[0] !==0) & (lat_lon[1] !== 0)) {
+        //   this.map.setView(lat_lon, 16);
+        //   if (this.marker != undefined) {
+        //     this.map.removeLayer(this.marker);
+        //   }        
+        //   this.marker = L.marker(lat_lon).addTo(this.map);
+        // }
       }
     },
 
