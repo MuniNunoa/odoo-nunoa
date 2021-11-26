@@ -19,17 +19,20 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'tickets'],
+    'depends': ['base', 'tickets', 'mail'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'views/procedures.xml',
         'views/procedures_categories.xml',
-        'views/neighborhood_plan.xml'
+        'views/neighborhood_plan.xml',
+        'static/src/xml/groups.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+
+    "qweb": ['static/src/xml/procedures_template.xml'],
 }
