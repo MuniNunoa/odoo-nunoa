@@ -13,7 +13,7 @@ AVAILABLE_PRIORITIES = [
 AVAILABLE_STATES = [
     ('nuevo', 'Nuevo'),
     ('en-proceso', 'En proceso'),
-    ('resuelto', 'Resuelto')
+    ('cerrado', 'Cerrado')
 ]
 
 STREET_TYPES = [
@@ -33,11 +33,15 @@ class Ticket(models.Model):
     priority = fields.Selection(AVAILABLE_PRIORITIES, 'Prioridad', default='0')
     state = fields.Selection(AVAILABLE_STATES, 'Estado', default='nuevo', required=True)
     created_at = fields.Datetime("Fecha de creación", default=lambda s: fields.Datetime.now())
-    closed_at = fields.Datetime("Fecha de cierre")
+    closed_at = fields.Datetime("Fecha de cierre", readonly=True)
     deadline = fields.Date("Vencimiento")
     
     requester = fields.Many2one('res.partner', string="Solicitante")
     assigned_to = fields.Many2one('res.users', string='Asignado a')
+
+    def close(self):
+        self.state = 'cerrado'
+        self.closed_at = fields.Datetime.now()
 
 class Street(models.Model):
     _name = 'tickets.street'
