@@ -14,7 +14,7 @@
           <field name="arch" type="xml">
               <tree>
                   <field name="name"/>
-                  <field name="category"/>
+                  <!-- <field name="category"/> -->
               </tree>
           </field>
       </record>
@@ -27,7 +27,7 @@
                   <form string="Nuevo tipo de procedimiento">
                       <sheet>
                           <group>
-                            <field name="category"/>
+                            <!-- <field name="category"/> -->
                             <field name="name"/>
                           </group>                    
                       </sheet>
@@ -37,7 +37,7 @@
           </record>
   
 
-    <menuitem id="nunoasegura_type_menu_list" name="Tipos" action="nunoasegura_type_action" parent="nunoasegura_menu_root"/>
+    
 
     
     <!-- category tree,form action -->
@@ -52,8 +52,9 @@
         <field name="name">nunoasegura.security.procedure.type.category.tree</field>
         <field name="model">nunoasegura.security.procedure.type.category</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree editable="bottom">
                 <field name="name"/>
+                <field name="types" widget="many2many_tags"/>
             </tree>
         </field>
     </record>
@@ -67,14 +68,18 @@
                     <sheet>
                         <group>
                           <field name="name"/>
+                          <field name="types" widget="many2many_tags"/>
                         </group>                    
                     </sheet>
                 </form>
             </field>
         </record>
-
-
-    <menuitem id="nunoasegura_category_menu_list" name="Categorías" action="nunoasegura_category_action" parent="nunoasegura_menu_root"/>
+        <!--  -->
+    
+        <menuitem id="nunoasegura_admin_menu" name="Administración" groups="base.user_admin" parent="nunoasegura_menu_root">
+            <!-- <menuitem id="nunoasegura_type_menu_list" name="Tipos" action="nunoasegura_type_action" /> -->
+            <menuitem id="nunoasegura_category_menu_list" name="Categorías" action="nunoasegura_category_action"/>
+        </menuitem>
 
     </data>
   </odoo>
