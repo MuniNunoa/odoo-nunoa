@@ -3,14 +3,14 @@
       <!-- type tree,form action -->
       <record model="ir.actions.act_window" id="nunoasegura_type_action">
           <field name="name">Tipos de procedimiento</field>
-          <field name="res_model">nunoasegura.security.procedure.type</field>
+          <field name="res_model">nunoasegura.procedure.type</field>
           <field name="view_mode">tree,form</field>
       </record>
   
       <!-- type tree view -->
       <record id="nunoasegura_type_tree" model="ir.ui.view">
-          <field name="name">nunoasegura.security.procedure.type.tree</field>
-          <field name="model">nunoasegura.security.procedure.type</field>
+          <field name="name">nunoasegura.procedure.type.tree</field>
+          <field name="model">nunoasegura.procedure.type</field>
           <field name="arch" type="xml">
               <tree>
                   <field name="name"/>
@@ -21,8 +21,8 @@
 
       <!-- type form view -->
       <record id="nunoasegura_type_form" model="ir.ui.view">
-              <field name="name">nunoasegura.security.procedure.type.form</field>
-              <field name="model">nunoasegura.security.procedure.type</field>
+              <field name="name">nunoasegura.procedure.type.form</field>
+              <field name="model">nunoasegura.procedure.type</field>
               <field name="arch" type="xml">
                   <form string="Nuevo tipo de procedimiento">
                       <sheet>
@@ -43,14 +43,14 @@
     <!-- category tree,form action -->
     <record model="ir.actions.act_window" id="nunoasegura_category_action">
         <field name="name">Categoría de procedimiento</field>
-        <field name="res_model">nunoasegura.security.procedure.type.category</field>
+        <field name="res_model">nunoasegura.procedure.type.category</field>
         <field name="view_mode">tree,form</field>
     </record>
 
     <!-- category tree view -->
     <record id="nunoasegura_category_tree" model="ir.ui.view">
-        <field name="name">nunoasegura.security.procedure.type.category.tree</field>
-        <field name="model">nunoasegura.security.procedure.type.category</field>
+        <field name="name">nunoasegura.procedure.type.category.tree</field>
+        <field name="model">nunoasegura.procedure.type.category</field>
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="name"/>
@@ -61,8 +61,8 @@
 
     <!-- category form view -->
     <record id="nunoasegura_category_form" model="ir.ui.view">
-            <field name="name">nunoasegura.security.procedure.type.category.form</field>
-            <field name="model">nunoasegura.security.procedure.type.category</field>
+            <field name="name">nunoasegura.procedure.type.category.form</field>
+            <field name="model">nunoasegura.procedure.type.category</field>
             <field name="arch" type="xml">
                 <form string="Nueva categoría de procedimiento">
                     <sheet>

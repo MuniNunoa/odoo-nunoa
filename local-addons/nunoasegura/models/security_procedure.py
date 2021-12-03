@@ -15,18 +15,17 @@ AVAILABLE_CHANNELS = [
 ]
 
 class SecurityProcedureTypeCategory(models.Model):
-    _name = 'nunoasegura.security.procedure.type.category'
+    _name = 'nunoasegura.procedure.type.category'
 
     name = fields.Char(string="Nombre")
-    types = fields.One2many('nunoasegura.security.procedure.type', 'category', string="Tipos")
-    # types = fields.One2many('nunoasegura.security.procedure.type', string="Tipos")
+    types = fields.One2many('nunoasegura.procedure.type', 'category', string="Tipos")
 
 
 class SecurityProcedureType(models.Model):
-    _name = 'nunoasegura.security.procedure.type'
+    _name = 'nunoasegura.procedure.type'
 
     name = fields.Char(string="Nombre")
-    category = fields.Many2one('nunoasegura.security.procedure.type.category', string="Categoría")
+    category = fields.Many2one('nunoasegura.procedure.type.category', string="Categoría")
 
 class Patrol(models.Model):
     _name = 'nunoasegura.patrol'
@@ -34,12 +33,13 @@ class Patrol(models.Model):
     name = fields.Char(string="Nombre")
     
 class SecurityProcedure(models.Model):
-    _name = 'nunoasegura.security.procedure'
+    _name = 'nunoasegura.procedure'
     _inherit = ['tickets.ticket', 'tickets.geoplace', 'mail.thread']
 
     channel = fields.Selection(AVAILABLE_CHANNELS, string="Canal")
-    type = fields.Many2one('nunoasegura.security.procedure.type', string='Tipo')
-    operator = fields.Many2one('res.users', string="Operador", default=lambda self: self.env.user, readonly=True)
+    category = fields.Many2one('nunoasegura.procedure.type.category', string="Categoría")
+    type = fields.Many2one('nunoasegura.procedure.type', string='Tipo')
+    operator = fields.Many2one('res.usersp', string="Operador", default=lambda self: self.env.user, readonly=True)
     neighborhood_plan = fields.Many2one('nunoasegura.neighborhood.plan', string="Plan Barrial")
     # inspectors = fields.Many2many('res.users', string='Inspectores')
     inspectors = fields.Many2many('res.users', string='Inspectores', 

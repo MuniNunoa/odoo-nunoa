@@ -1,9 +1,15 @@
 <odoo>
   <data>
     <!-- procedure tree view -->
+
+    <!-- admin views -->
+
+    <!-- telephone views -->
+
+    <!-- radio views -->
     <record id="nunoasegura_procedure_tree" model="ir.ui.view">
-        <field name="name">nunoasegura.security.procedure.tree</field>
-        <field name="model">nunoasegura.security.procedure</field>
+        <field name="name">nunoasegura.procedure.tree</field>
+        <field name="model">nunoasegura.procedure</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="id"/>
@@ -21,8 +27,8 @@
 
     <!-- procedure form view -->
     <record id="nunoasegura_procedure_phone_form" model="ir.ui.view">
-            <field name="name">nunoasegura.security.procedure.form</field>
-            <field name="model">nunoasegura.security.procedure</field>
+            <field name="name">nunoasegura.procedure.form</field>
+            <field name="model">nunoasegura.procedure</field>
             <field name="arch" type="xml">
                 <form string="Nuevo procedimiento">
                     <sheet>
@@ -38,7 +44,8 @@
                         </group>
                         <group>
                             <group>
-                                <field name="type"/>
+                                <field name="category"/>
+                                <field name="type" domain="[('category', '=', category)]"/>
                                 <field name="priority" widget="priority"/>
                             </group>
                             <group>
@@ -66,67 +73,73 @@
 
 
         <record id="nunoasegura_procedure_radio_form" model="ir.ui.view">
-            <field name="name">nunoasegura.security.procedure.form</field>
-            <field name="model">nunoasegura.security.procedure</field>
+            <field name="name">nunoasegura.procedure.form</field>
+            <field name="model">nunoasegura.procedure</field>
             <field name="arch" type="xml">
                 <form string="Nuevo procedimiento">
                     <sheet>
-                        <group>
-
-                            
-                            <group>
+                        <group>             
+                            <group string="Asignar patrulla">
                                 <field name="inspectors" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
                                 <field name="patrols" widget="many2many_tags"/>
                                 <field name="outcome"/>
-                                <group>
-                                    <button name="mark_inspector_arrival" string="Marcar llegada al lugar" type="object"/>
-                                    <button name="close" string="Marcar fin del procedimiento" type="object"/>
-                                </group>
-                                
+                                <div style="margin-top: 50px;">
+                                    <div>
+                                        <button name="mark_inspector_arrival" string="Marcar llegada al lugar" type="object"/>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <button name="close" string="Marcar fin del procedimiento" type="object"/>
+                                    </div>
+                                </div>
                             </group>
-                            <group>
-                                <field name="created_at"/>
-                                <field name="inspector_assigned_at" force_save="1"/>
-                                <field name="inspector_arrival_at"/>
-                                <field name="closed_at"/>
+                            <group string="Información del procedimiento">
+                                <notebook>
+                                    <page string="General">
+                                        <group>
+                                            <field name="created_at" readonly="1"/>
+                                            <field name="inspector_assigned_at" force_save="1"/>
+                                            <field name="inspector_arrival_at"/>
+                                            <field name="closed_at"/>
+                                            <field name="channel" readonly="1"/>
+                                            <field name="neighborhood_plan" attrs="{'invisible':[('channel', '!=', 'plan-barrial')]}"/>
+                                            <field name="operator" readonly="1"/>
+                                        </group>
+                                    </page>
+                                    <page string="Descripción">
+                                        <group>
+                                            <field name="type" readonly="1"/>
+                                            <field name="priority" widget="priority"/>
+                                            <field name="description" readonly="1"/>
+                                        </group>
+                                    </page>
+                                    <page string="Dirección">
+                                        <group>
+                                            <field name="street"/>
+                                            <field name="address_number"/>
+                                            <field name="unidad_vecinal"/>
+                                            <field name="cuadrante"/> 
+                                        </group>
+                                        <group>
+                                            <field name="latlon" widget="openstreetmap" nolabel="1" force_save="1"/>
+                                        </group>
+                                    </page>
+                                </notebook>
                             </group>
-                            <group string="Comentarios y adjuntos">
+                            <group string="Observaciones del inspector">
                                 <div class="oe_chatter">
                                     <field name="message_ids" widget="mail_thread"/> 
                                 </div>
                             </group>
-                            <group>
-                                
-                                <field name="channel"/>
-                                <field name="neighborhood_plan" attrs="{'invisible':[('channel', '!=', 'plan-barrial')]}"/>
-                            </group>
-                            <group>
-                                <field name="operator"/>
-                            </group>
+                        </group>
+                        <!-- <group string="Comentarios y adjuntos">
+                            
                         </group>
                         <group>
-                            <group>
-                                <field name="type"/>
-                                <field name="priority" widget="priority"/>
-                            </group>
-                            <group>
-                                <field name="description"/>
-                            </group>
-                        </group>
-                        <group>
-                            <group>
-                                <field name="street"/>
-                                <field name="address_number"/>
-                                <field name="latitude" force_save="1"/>
-                                <field name="longitude" force_save="1"/>
-                                <field name="unidad_vecinal"/>
-                                <field name="cuadrante"/>
-                            </group>
-                            <group>
-                                <button name="reset_geolocation" string="Reiniciar Geo" type="object"/>
-                                <field name="latlon" widget="openstreetmap" nolabel="1" force_save="1"/>
-                            </group>
-                        </group>
+                            
+                            
+                        </group> -->
+
+                        <!-- <button name="reset_geolocation" string="Reiniciar Geo" type="object"/> -->
                                      
                     </sheet>
                     
@@ -137,7 +150,7 @@
     <!-- procedure tree,form action -->
     <record id="nunoasegura_procedure_action" model="ir.actions.act_window">
         <field name="name">Procedimientos</field>
-        <field name="res_model">nunoasegura.security.procedure</field>
+        <field name="res_model">nunoasegura.procedure</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{
             'form_view_ref': 'nunoasegura.nunoasegura_procedure_phone_form' 
@@ -146,7 +159,7 @@
 
     <record id="nunoasegura_procedure_radio_action" model="ir.actions.act_window">
         <field name="name">Procedimientos</field>
-        <field name="res_model">nunoasegura.security.procedure</field>
+        <field name="res_model">nunoasegura.procedure</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{
             'form_view_ref': 'nunoasegura.nunoasegura_procedure_radio_form' 
