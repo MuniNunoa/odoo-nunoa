@@ -57,6 +57,6 @@
               </field>
           </record>
           
-        <menuitem id="nunoasegura_neighborhood_plan_menu_list" name="Planes Barriales" action="nunoasegura_neighborhood_plan_action" parent="nunoasegura_menu_root"/>
+        <!-- <menuitem id="nunoasegura_neighborhood_plan_menu_list" name="Planes Barriales" action="nunoasegura_neighborhood_plan_action" parent="nunoasegura_menu_root"/> -->
     </data>
   </odoo>
