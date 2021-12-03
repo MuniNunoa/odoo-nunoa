@@ -23,11 +23,12 @@
 
     # always loaded
     'data': [
+        'static/src/xml/groups.xml',
         'security/ir.model.access.csv',
         'views/procedures.xml',
         'views/procedures_categories.xml',
-        'views/neighborhood_plan.xml',
-        'static/src/xml/groups.xml'
+        'views/neighborhood_plan.xml'
+        
     ],
     # only loaded in demonstration mode
     'demo': [
