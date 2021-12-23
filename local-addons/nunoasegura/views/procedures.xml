@@ -80,7 +80,7 @@
                     <sheet>
                         <group>             
                             <group string="Asignar patrulla">
-                                <field name="inspectors" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/>
+                                <!-- <field name="inspectors2" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/> -->
                                 <field name="patrols" widget="many2many_tags"/>
                                 <field name="outcome"/>
                                 <div style="margin-top: 50px;">
@@ -173,15 +173,11 @@
         <menuitem id="nunoasegura_procedure_menu_list" 
             name="Procedimientos (telefonista)" 
             action="nunoasegura_procedure_action"
-            groups="nunoasegura.telephonist_group"/>
+            groups="nunoasegura.telephonist_group,base.user_admin"/>
         <menuitem id="nunoasegura_procedure_menu_list_radio" 
             name="Procedimientos (radiooperador)" 
             action="nunoasegura_procedure_radio_action"
-            groups="nunoasegura.radiooperator_group"/>
-        <menuitem id="nunoasegura_procedure_menu_list_admin" 
-            name="Procedimientos (admin)" 
-            action="nunoasegura_procedure_action"
-            groups="base.user_admin"/>
+            groups="nunoasegura.radiooperator_group,base.user_admin"/>
     </menuitem>
 
     <!-- explicit list view definition -->
