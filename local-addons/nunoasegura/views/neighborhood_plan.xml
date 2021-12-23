@@ -75,6 +75,7 @@
             name="Planes Barriales" 
             action="nunoasegura_neighborhood_plan_action" 
             parent="nunoasegura_menu_root"
-            groups="base.user_admin"/>
+            groups="base.user_admin,nunoasegura.community_group"/>
+
     </data>
   </odoo>
