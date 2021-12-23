@@ -25,5 +25,12 @@
             <field name="comment">Atiende procedimientos en terreno.</field>
             <field name="category_id" ref="nunoasegura.module_category_nunoasegura"/>
         </record>
+
+        <record id="community_group" model="res.groups">
+            <field name="name">Comunitario</field>
+            <field name="comment">Equipo Comunitario de Seguridad Pública</field>
+            <field name="category_id" ref="nunoasegura.module_category_nunoasegura"/>
+        </record>
+
     </data>
 </odoo>
