@@ -44,22 +44,23 @@ class NeighborhoodPlan(models.Model):
     _name = 'nunoasegura.neighborhood.plan'
     _inherit = ['tickets.ticket']
 
+    _rec_name = "id"
+    
     request_source = fields.Selection(AVAILABLE_SOURCES, string="Fuente de requerimiento")
     responsible_team = fields.Selection(AVAILABLE_TEAMS, string="Equipo responsable")
+    
+    address = fields.Text("Calles")
+
     cuadrante = fields.Integer("Cuadrante")
     unidad_vecinal = fields.Integer("Unidad Vecinal")
+
     intervention_type = fields.Selection(list(zip(INTERVENTION_TYPES, INTERVENTION_TYPES)), string="Intervención requerida")
 
-    weekday_start = fields.Selection(WEEKDAYS, string="Desde")
-    weekday_end = fields.Selection(WEEKDAYS, string="Hasta")
+    weekday_start = fields.Selection(WEEKDAYS, string="De")
+    weekday_end = fields.Selection(WEEKDAYS, string="A")
     
+    schedule_start = fields.Float(string='Hora de inicio')
+    schedule_end = fields.Float(string='Hora de término')
+
     intervention_start = fields.Date("Inicio de intervención")
     intervention_end = fields.Date("Término de intervención")
-    # intervention_duration = fields.Integer("Días de duración", compute="_compute_intervention_duration")
-
-    # @api.depends('intervention_start', 'intervention_end')
-    # def _compute_intervention_duration(self):
-    #     pass
-
-
-    
