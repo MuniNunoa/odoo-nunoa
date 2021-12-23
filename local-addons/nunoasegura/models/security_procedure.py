@@ -31,6 +31,11 @@ class Patrol(models.Model):
     _name = 'nunoasegura.patrol'
 
     name = fields.Char(string="Nombre")
+
+class Inspector(models.Model):
+    _name = 'nunoasegura.inspector'
+
+    name = fields.Char(string="Nombre")
     
 class SecurityProcedure(models.Model):
     _name = 'nunoasegura.procedure'
@@ -42,8 +47,13 @@ class SecurityProcedure(models.Model):
     operator = fields.Many2one('res.users', string="Operador", default=lambda self: self.env.user, readonly=True)
     neighborhood_plan = fields.Many2one('nunoasegura.neighborhood.plan', string="Plan Barrial")
     # inspectors = fields.Many2many('res.users', string='Inspectores')
-    inspectors = fields.Many2many('res.users', string='Inspectores', 
-        domain=lambda self: [("groups_id", "=", self.env.ref("nunoasegura.inspector_group").id)])
+    
+    
+    # inspectors = fields.Many2many('res.users', string='Inspectores', 
+    #     domain=lambda self: [("groups_id", "=", self.env.ref("nunoasegura.inspector_group").id)])
+
+    # inspectors2 = fields.Many2many('nunoasegura.inspectors', string='Inspectores')
+
     patrols = fields.Many2many('nunoasegura.patrol', string="Patrullas")
     outcome = fields.Text("Resultado")
 
@@ -54,9 +64,11 @@ class SecurityProcedure(models.Model):
     def create(self, data):
         return super(SecurityProcedure, self.with_context(tracking_disable=True)).create(data)
 
-    @api.onchange('inspectors', 'patrols')
+    # @api.onchange('inspectors2', 'patrols')
+    @api.onchange('patrols')
     def set_inspector_assigned_at(self):
-        if (not self.inspector_assigned_at) and (self.inspectors or self.patrols):
+        # if (not self.inspector_assigned_at) and (self.inspectors2 or self.patrols):
+        if (not self.inspector_assigned_at) and (self.patrols):
             for record in self:
                 record.inspector_assigned_at = fields.Datetime.now()
             
