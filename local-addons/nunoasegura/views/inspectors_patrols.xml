@@ -1,0 +1,96 @@
+<odoo>
+    <data>
+      <!-- patrol tree,form action -->
+      <record model="ir.actions.act_window" id="nunoasegura_patrol_action">
+          <field name="name">Patrullas</field>
+          <field name="res_model">nunoasegura.patrol</field>
+          <field name="view_mode">tree,form</field>
+      </record>
+  
+      <!-- patrol tree view -->
+      <record id="nunoasegura_patrol_tree" model="ir.ui.view">
+          <field name="name">nunoasegura.patrol.tree</field>
+          <field name="model">nunoasegura.patrol</field>
+          <field name="arch" type="xml">
+              <tree editable="bottom">
+                  <field name="name"/>
+              </tree>
+          </field>
+      </record>
+
+      <!-- inspector tree,form action -->
+      <record model="ir.actions.act_window" id="nunoasegura_inspector_action">
+        <field name="name">Inspectores</field>
+        <field name="res_model">nunoasegura.inspector</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- inspector tree view -->
+    <record id="nunoasegura_inspector_tree" model="ir.ui.view">
+        <field name="name">nunoasegura.inspector.tree</field>
+        <field name="model">nunoasegura.inspector</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+      <!-- type form view -->
+      <!-- <record id="nunoasegura_type_form" model="ir.ui.view">
+              <field name="name">nunoasegura.patrol.form</field>
+              <field name="model">nunoasegura.patrol</field>
+              <field name="arch" type="xml">
+                  <form string="Nueva patrulla">
+                      <sheet>
+                          <group>
+                            <field name="name"/>
+                          </group>                    
+                      </sheet>
+                      
+                  </form>
+              </field>
+          </record> -->
+  
+    <!-- category tree,form action -->
+    <!-- <record model="ir.actions.act_window" id="nunoasegura_category_action">
+        <field name="name">Categoría de procedimiento</field>
+        <field name="res_model">nunoasegura.procedure.type.category</field>
+        <field name="view_mode">tree,form</field>
+    </record> -->
+
+    <!-- category tree view -->
+    <!-- <record id="nunoasegura_category_tree" model="ir.ui.view">
+        <field name="name">nunoasegura.procedure.type.category.tree</field>
+        <field name="model">nunoasegura.procedure.type.category</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="types" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record> -->
+
+    <!-- category form view -->
+    <!-- <record id="nunoasegura_category_form" model="ir.ui.view">
+            <field name="name">nunoasegura.procedure.type.category.form</field>
+            <field name="model">nunoasegura.procedure.type.category</field>
+            <field name="arch" type="xml">
+                <form string="Nueva categoría de procedimiento">
+                    <sheet>
+                        <group>
+                          <field name="name"/>
+                          <field name="types" widget="many2many_tags"/>
+                        </group>                    
+                    </sheet>
+                </form>
+            </field>
+        </record> -->
+        <!--  -->
+    
+
+        <menuitem id="nunoasegura_patrol_menu_list" name="Patrullas" action="nunoasegura_patrol_action" parent="nunoasegura_admin_menu"/>
+        <menuitem id="nunoasegura_inspector_menu_list" name="Inspectores" action="nunoasegura_inspector_action" parent="nunoasegura_admin_menu"/>
+
+    </data>
+  </odoo>
