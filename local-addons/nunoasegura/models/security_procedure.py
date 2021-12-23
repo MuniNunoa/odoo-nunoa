@@ -39,7 +39,7 @@ class SecurityProcedure(models.Model):
     channel = fields.Selection(AVAILABLE_CHANNELS, string="Canal")
     category = fields.Many2one('nunoasegura.procedure.type.category', string="Categoría")
     type = fields.Many2one('nunoasegura.procedure.type', string='Tipo')
-    operator = fields.Many2one('res.usersp', string="Operador", default=lambda self: self.env.user, readonly=True)
+    operator = fields.Many2one('res.users', string="Operador", default=lambda self: self.env.user, readonly=True)
     neighborhood_plan = fields.Many2one('nunoasegura.neighborhood.plan', string="Plan Barrial")
     # inspectors = fields.Many2many('res.users', string='Inspectores')
     inspectors = fields.Many2many('res.users', string='Inspectores', 

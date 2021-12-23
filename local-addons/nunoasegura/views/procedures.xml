@@ -178,6 +178,10 @@
             name="Procedimientos (radiooperador)" 
             action="nunoasegura_procedure_radio_action"
             groups="nunoasegura.radiooperator_group"/>
+        <menuitem id="nunoasegura_procedure_menu_list_admin" 
+            name="Procedimientos (admin)" 
+            action="nunoasegura_procedure_action"
+            groups="base.user_admin"/>
     </menuitem>
 
     <!-- explicit list view definition -->
