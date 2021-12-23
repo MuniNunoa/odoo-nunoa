@@ -27,8 +27,8 @@
         'security/ir.model.access.csv',
         'views/procedures.xml',
         'views/procedures_categories.xml',
-        'views/neighborhood_plan.xml'
-        
+        'views/neighborhood_plan.xml',
+        'views/inspectors_patrols.xml'
     ],
     # only loaded in demonstration mode
     'demo': [
