@@ -12,12 +12,12 @@
           <field name="name">nunoasegura.neighborhood.plan.tree</field>
           <field name="model">nunoasegura.neighborhood.plan</field>
           <field name="arch" type="xml">
-              <tree>    
+              <tree>
+                <field name="id"/>
                 <field name="created_at"/>
-                <field name="state"/>
-                <field name="description"/>
                 <field name="request_source"/>
                 <field name="responsible_team"/>
+                <field name="description"/>
                 <field name="cuadrante"/>
                 <field name="unidad_vecinal"/>
                 <field name="intervention_type"/>
@@ -38,18 +38,31 @@
                   <form string="Nuevo Plan Barrial">
                       <sheet>
                           <group>
-                            <field name="created_at"/>
-                            <field name="state"/>
-                            <field name="description"/>
-                            <field name="request_source"/>
-                            <field name="responsible_team"/>
-                            <field name="cuadrante"/>
-                            <field name="unidad_vecinal"/>
-                            <field name="intervention_type"/>
-                            <field name="weekday_start"/>
-                            <field name="weekday_end"/>
-                            <field name="intervention_start"/>
-                            <field name="intervention_end"/>
+                                <group>
+                                    <field name="created_at" readonly="1"/>
+                                    <field name="request_source"/>
+                                    <field name="responsible_team"/>
+                                    <field name="intervention_type"/>
+                                    <field name="description"/>
+                                </group>
+
+                                <group string="¿Dónde?">
+                                    <field name="address"/>
+                                    <field name="cuadrante"/>
+                                    <field name="unidad_vecinal"/>
+                                </group>
+                                
+                                <group string="¿Cuándo?">
+                                    <field name="intervention_start"/>
+                                    <field name="intervention_end"/>
+
+                                    <field name="weekday_start"/>
+                                    <field name="weekday_end"/>
+                                    
+                                    <field name="schedule_start" widget="float_time"/>
+                                    <field name="schedule_end" widget="float_time"/>
+                                </group>
+                                
                           </group>        
                       </sheet>
                       
@@ -57,6 +70,11 @@
               </field>
           </record>
           
-        <!-- <menuitem id="nunoasegura_neighborhood_plan_menu_list" name="Planes Barriales" action="nunoasegura_neighborhood_plan_action" parent="nunoasegura_menu_root"/> -->
+        <menuitem 
+            id="nunoasegura_neighborhood_plan_menu_list" 
+            name="Planes Barriales" 
+            action="nunoasegura_neighborhood_plan_action" 
+            parent="nunoasegura_menu_root"
+            groups="base.user_admin"/>
     </data>
   </odoo>
