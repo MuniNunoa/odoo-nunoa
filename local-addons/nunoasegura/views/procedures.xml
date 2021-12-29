@@ -35,7 +35,7 @@
                         <group>
                             <group>
                                 <field name="created_at"/>
-                                <field name="channel"/>
+                                <field name="channel" readonly="1"/>
                                 <field name="neighborhood_plan" attrs="{'invisible':[('channel', '!=', 'plan-barrial')]}"/>
                             </group>
                             <group>
@@ -80,7 +80,7 @@
                     <sheet>
                         <group>             
                             <group string="Asignar patrulla">
-                                <!-- <field name="inspectors2" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/> -->
+                                <!-- <field namex="inspectors2" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/> -->
                                 <field name="patrols" widget="many2many_tags"/>
                                 <field name="outcome"/>
                                 <div style="margin-top: 50px;">
@@ -94,6 +94,17 @@
                             </group>
                             <group string="Información del procedimiento">
                                 <notebook>
+                                    <page string="Dirección">
+                                        <group>
+                                            <field name="street"/>
+                                            <field name="address_number"/>
+                                            <field name="unidad_vecinal"/>
+                                            <field name="cuadrante"/> 
+                                        </group>
+                                        <group>
+                                            <field name="latlon" widget="openstreetmap" nolabel="1" force_save="1"/>
+                                        </group>
+                                    </page>
                                     <page string="General">
                                         <group>
                                             <field name="created_at" readonly="1"/>
@@ -112,17 +123,7 @@
                                             <field name="description" readonly="1"/>
                                         </group>
                                     </page>
-                                    <page string="Dirección">
-                                        <group>
-                                            <field name="street"/>
-                                            <field name="address_number"/>
-                                            <field name="unidad_vecinal"/>
-                                            <field name="cuadrante"/> 
-                                        </group>
-                                        <group>
-                                            <field name="latlon" widget="openstreetmap" nolabel="1" force_save="1"/>
-                                        </group>
-                                    </page>
+                                    
                                 </notebook>
                             </group>
                             <group string="Observaciones del inspector">
@@ -153,9 +154,11 @@
         <field name="res_model">nunoasegura.procedure</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{
-            'form_view_ref': 'nunoasegura.nunoasegura_procedure_phone_form' 
+            'form_view_ref': 'nunoasegura.nunoasegura_procedure_phone_form',
+            'default_channel': 'telefono'
         }</field> 
     </record>
+
 
     <record id="nunoasegura_procedure_radio_action" model="ir.actions.act_window">
         <field name="name">Procedimientos</field>
@@ -163,9 +166,9 @@
         <field name="view_mode">tree,form</field>
         <field name="context">{
             'form_view_ref': 'nunoasegura.nunoasegura_procedure_radio_form' 
-        }</field> 
+        }</field>
     </record>
-    <!-- 'tree_view_ref': 'my_module.view_all_customers_tree',   -->
+    
 
 
     <!-- menus -->
