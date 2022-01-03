@@ -1,12 +1,24 @@
 <odoo>
   <data>
+    <!-- contact form view -->
+    <record id="nunoasegura_contact_form" model="ir.ui.view">
+        <field name="name">nunoasegura.procedure.contact.form</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+   
     <!-- procedure tree view -->
-
-    <!-- admin views -->
-
-    <!-- telephone views -->
-
-    <!-- radio views -->
     <record id="nunoasegura_procedure_tree" model="ir.ui.view">
         <field name="name">nunoasegura.procedure.tree</field>
         <field name="model">nunoasegura.procedure</field>
@@ -26,7 +38,7 @@
     </record>
 
     <!-- procedure form view -->
-    <record id="nunoasegura_procedure_phone_form" model="ir.ui.view">
+    <record id="nunoasegura_procedure_form" model="ir.ui.view">
             <field name="name">nunoasegura.procedure.form</field>
             <field name="model">nunoasegura.procedure</field>
             <field name="arch" type="xml">
@@ -35,7 +47,7 @@
                         <group>
                             <group>
                                 <field name="created_at"/>
-                                <field name="channel" readonly="1"/>
+                                <field name="channel"/>
                                 <field name="neighborhood_plan" attrs="{'invisible':[('channel', '!=', 'plan-barrial')]}"/>
                             </group>
                             <group>
@@ -50,10 +62,14 @@
                             </group>
                             <group>
                                 <field name="description"/>
+                                <field name="requester"  context="{'form_view_ref': 'nunoasegura.nunoasegura_contact_form'}" domain="[('user_ids','=',False),('is_company','=',False)]"/>
+                                <field name="requester_phone"/>
+                                <field name="requester_email"/>
                             </group>
                         </group>
                         <group>
                             <group>
+                                
                                 <field name="street"/>
                                 <field name="address_number"/>
                                 <field name="latitude" force_save="1"/>
@@ -82,8 +98,8 @@
                             <group string="Asignar patrulla">
                                 <!-- <field namex="inspectors2" widget="many2many_tags" options="{'no_create': True, 'no_open': True}"/> -->
                                 <field name="patrols" widget="many2many_tags"/>
-                                <field name="outcome"/>
-                                <div style="margin-top: 50px;">
+                                
+                                <div style="margin-top: 50px; margin-bottom: 50px;">
                                     <div>
                                         <button name="mark_inspector_arrival" string="Marcar llegada al lugar" type="object"/>
                                     </div>
@@ -91,6 +107,15 @@
                                         <button name="close" string="Marcar fin del procedimiento" type="object"/>
                                     </div>
                                 </div>
+
+                                
+                                <field name="created_at" readonly="1"/>
+                                <field name="inspector_assigned_at" force_save="1"/>
+                                <field name="inspector_arrival_at"/>
+                                <field name="closed_at"/>
+
+                                <field name="outcome"/>
+
                             </group>
                             <group string="Información del procedimiento">
                                 <notebook>
@@ -105,22 +130,21 @@
                                             <field name="latlon" widget="openstreetmap" nolabel="1" force_save="1"/>
                                         </group>
                                     </page>
-                                    <page string="General">
-                                        <group>
-                                            <field name="created_at" readonly="1"/>
-                                            <field name="inspector_assigned_at" force_save="1"/>
-                                            <field name="inspector_arrival_at"/>
-                                            <field name="closed_at"/>
-                                            <field name="channel" readonly="1"/>
-                                            <field name="neighborhood_plan" attrs="{'invisible':[('channel', '!=', 'plan-barrial')]}"/>
-                                            <field name="operator" readonly="1"/>
-                                        </group>
-                                    </page>
                                     <page string="Descripción">
                                         <group>
+                                            <field name="channel" readonly="1"/>
+                                            <field name="operator" readonly="1"/>
                                             <field name="type" readonly="1"/>
                                             <field name="priority" widget="priority"/>
                                             <field name="description" readonly="1"/>
+                                            <field name="neighborhood_plan" attrs="{'invisible':[('channel', '!=', 'plan-barrial')]}"/>
+                                        </group>
+                                    </page>
+                                    <page string="Solicitante">
+                                        <group>
+                                            <field name="requester_name"/>
+                                            <field name="requester_phone"/>
+                                            <field name="requester_email"/>
                                         </group>
                                     </page>
                                     
@@ -148,20 +172,42 @@
             </field>
         </record>
 
+<!-- 
+        <record id="nunoasegura_procedure_phone_form" model="ir.ui.view">
+            <field name="model">nunoasegura.procedure</field>
+            <field name="inherit_id" ref="nunoasegura.nunoasegura_procedure_form"/>
+            <field name="arch" type="xml">
+                <field name="channel" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </field>
+            </field>
+        </record> -->
+
+
+
     <!-- procedure tree,form action -->
     <record id="nunoasegura_procedure_action" model="ir.actions.act_window">
         <field name="name">Procedimientos</field>
         <field name="res_model">nunoasegura.procedure</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{
-            'form_view_ref': 'nunoasegura.nunoasegura_procedure_phone_form',
+            'form_view_ref': 'nunoasegura.nunoasegura_procedure_form'
+        }</field> 
+    </record>
+
+    <record id="nunoasegura_procedure_phone_action" model="ir.actions.act_window">
+        <field name="name">Procedimientos</field>
+        <field name="res_model">nunoasegura.procedure</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+            'form_view_ref': 'nunoasegura.nunoasegura_procedure_form',
             'default_channel': 'telefono'
         }</field> 
     </record>
 
 
     <record id="nunoasegura_procedure_radio_action" model="ir.actions.act_window">
-        <field name="name">Procedimientos</field>
+        <field name="name">Asignar procedimientos</field>
         <field name="res_model">nunoasegura.procedure</field>
         <field name="view_mode">tree,form</field>
         <field name="context">{
@@ -174,11 +220,15 @@
     <!-- menus -->
     <menuitem id="nunoasegura_menu_root" name="Ñuñoa Segura" web_icon="nunoasegura,static/description/icon.png">
         <menuitem id="nunoasegura_procedure_menu_list" 
-            name="Procedimientos (telefonista)" 
+            name="Crear procedimiento" 
             action="nunoasegura_procedure_action"
+            groups="nunoasegura.radiooperator_group,base.user_admin"/>
+        <menuitem id="nunoasegura_procedure_menu_list_phone" 
+            name="Crear procedimiento telefónico" 
+            action="nunoasegura_procedure_phone_action"
             groups="nunoasegura.telephonist_group,base.user_admin"/>
         <menuitem id="nunoasegura_procedure_menu_list_radio" 
-            name="Procedimientos (radiooperador)" 
+            name="Asignar procedimiento" 
             action="nunoasegura_procedure_radio_action"
             groups="nunoasegura.radiooperator_group,base.user_admin"/>
     </menuitem>
