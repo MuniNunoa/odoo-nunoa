@@ -39,6 +39,11 @@ class Ticket(models.Model):
     requester = fields.Many2one('res.partner', string="Solicitante")
     assigned_to = fields.Many2one('res.users', string='Asignado a')
 
+    requester_name = fields.Char(related='requester.name', string="Nombre")
+    requester_email = fields.Char(related='requester.email', string="Teléfono")
+    requester_phone = fields.Char(related='requester.phone', string="Correo")
+
+
     def close(self):
         self.state = 'cerrado'
         self.closed_at = fields.Datetime.now()
